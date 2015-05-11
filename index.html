@@ -9,17 +9,15 @@
     </style>
   </head>
   <body>
-    <canvas id="myCanvas" width="800" height="600"></canvas>
+    <canvas id="myCanvas" width="1000" height="800"></canvas>
     <script>
 		var canvas = document.getElementById('myCanvas');
 		var context = canvas.getContext('2d');
-		var radius = 70;
 
-		function drawCircle(centerX, centerY, radius, value)
-		{
+		function drawCircle(centerX, centerY, radius, value, color) {
 			context.beginPath();
 			context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-			context.fillStyle = 'green';
+			context.fillStyle = color;
 			context.fill();
 			context.lineWidth = 5;
 			context.strokeStyle = '#003300';
@@ -27,11 +25,61 @@
 			
 			context.textAlign = 'center';
 			context.fillStyle = "#FFFFFF";
-			context.font = "70px Verdana";
-			context.fillText(value, centerX, centerY + 25);
+			context.font = "80px Verdana";
+			context.fillText(value, centerX, centerY + 30);
+		}
+
+		function drawLine(x1, y1, x2, y2) {
+			context.beginPath();
+			context.moveTo(x1, y1);
+			context.lineTo(x2, y2);
+			context.stroke();
 		}
 		
-		drawCircle(100, 100, 70, 10);
+		drawCircle(600, 100, 80, 10, 'green');
+		drawCircle(400, 300, 80, 8, 'red');
+		drawCircle(200, 500, 80, 5, 'blue');
+		drawLine(600 - 55, 100 + 55, 400 + 55, 300 - 55);
+		drawLine(400 - 55, 300 + 55, 200 + 55, 500 - 55);
+
+		window.requestAnimFrame = (function(callback) {
+			return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
+					window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+						function(callback) {
+							window.setTimeout(callback, 1000 / 60);
+						};
+		})();
+
+		function animate(canvas, context, startTime) {
+			// update
+			var time = (new Date()).getTime() - startTime;
+
+			var linearSpeed = 100;
+			var d = linearSpeed * time / 1000;
+
+			if(d > 200) {
+				return;
+			}
+
+			// clear
+			context.clearRect(0, 0, canvas.width, canvas.height);
+
+			drawCircle(600 + d, 100 + d, 80, 10, 'green');
+			drawCircle(400 + d, 300 - d, 80, 8, 'red');
+			drawCircle(200 + d, 500 - d, 80, 5, 'blue');
+			//drawLine(600 - 55, 100 + 55, 400 + 55, 300 - 55);
+			//drawLine(400 - 55, 300 + 55, 200 + 55, 500 - 55);
+
+			// request new frame
+			requestAnimFrame(function() {
+				animate(canvas, context, startTime);
+			});
+		}
+
+		function startAnimation() {
+	        var startTime = (new Date()).getTime();
+	        animate(canvas, context, startTime);
+	    }
     </script>
   </body>
 </html>  
