@@ -66,19 +66,19 @@
 		function restart() {
 			context.clearRect(0, 0, canvas.width, canvas.height);
 			context.lineWidth = 5;
-			drawLine(600, 100, 400, 300);
-			drawCircle(600, 100, 80, 10, 'green');
-			drawCircle(400, 300, 80, 8, 'red');
+			drawLine(400, 100, 600, 300);
+			drawCircle(400, 100, 80, 5, 'green');
+			drawCircle(600, 300, 80, 8, 'red');
 		}
 
 		function addNode() {
 			context.clearRect(0, 0, canvas.width, canvas.height);
 			context.lineWidth = 5;
-			drawLine(600, 100, 400, 300);
-			drawLine(400, 300, 200, 500);
-			drawCircle(600, 100, 80, 10, 'green');
-			drawCircle(400, 300, 80, 8, 'red');
-			drawCircle(200, 500, 80, 5, 'blue');
+			drawLine(400, 100, 600, 300);
+			drawLine(600, 300, 800, 500);
+			drawCircle(400, 100, 80, 5, 'green');
+			drawCircle(600, 300, 80, 8, 'red');
+			drawCircle(800, 500, 80, 10, 'blue');
 		}
 
 		restart();
@@ -102,13 +102,13 @@
 
 			if(d > 200) {
 				d = 200;
-				drawLine(600, 100,  800, 300);
-				drawLine(600, 100, 400, 300);
+				drawLine(400, 100,  200, 300);
+				drawLine(400, 100, 600, 300);
 			}
 
-			drawCircle(600 + d, 100 + d, 80, 10, 'green');
-			drawCircle(400 + d, 300 - d, 80, 8, 'red');
-			drawCircle(200 + d, 500 - d, 80, 5, 'blue');
+			drawCircle(400 - d, 100 + d, 80, 5, 'green');
+			drawCircle(600 - d, 300 - d, 80, 8, 'red');
+			drawCircle(800 - d, 500 - d, 80, 10, 'blue');
 
 			if (d == 200) {
 				return;

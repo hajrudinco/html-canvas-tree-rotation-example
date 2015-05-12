@@ -21,8 +21,11 @@
   	<div class="button" style="background-color:red" onclick="javascript:addNode()">
 		Add node
   	</div>
-  	<div class="button" style="background-color: blue;" onclick="javascript:startAnimation()">
-		Rotate
+  	<div class="button" style="background-color: blue;" onclick="javascript:startAnimation(1)">
+		R1
+  	</div>
+  	<div class="button" style="background-color: blue;" onclick="javascript:startAnimation(2)">
+		R2
   	</div>
   	<a class="navigation" href="index.html">
 		LL
@@ -66,19 +69,19 @@
 		function restart() {
 			context.clearRect(0, 0, canvas.width, canvas.height);
 			context.lineWidth = 5;
-			drawLine(600, 100, 400, 300);
-			drawCircle(600, 100, 80, 10, 'green');
-			drawCircle(400, 300, 80, 8, 'red');
+			drawLine(400, 100, 600, 300);
+			drawCircle(400, 100, 80, 5, 'green');
+			drawCircle(600, 300, 80, 10, 'red');
 		}
 
 		function addNode() {
 			context.clearRect(0, 0, canvas.width, canvas.height);
 			context.lineWidth = 5;
-			drawLine(600, 100, 400, 300);
-			drawLine(400, 300, 200, 500);
-			drawCircle(600, 100, 80, 10, 'green');
-			drawCircle(400, 300, 80, 8, 'red');
-			drawCircle(200, 500, 80, 5, 'blue');
+			drawLine(400, 100, 600, 300);
+			drawLine(600, 300, 400, 500);
+			drawCircle(400, 100, 80, 5, 'green');
+			drawCircle(600, 300, 80, 10, 'red');
+			drawCircle(400, 500, 80, 8, 'blue');
 		}
 
 		restart();
@@ -91,7 +94,7 @@
 						};
 		})();
 
-		function rotateNodes(canvas, context, startTime) {
+		function rotateNodesOne(canvas, context, startTime) {
 			// update
 			var time = (new Date()).getTime() - startTime;
 
@@ -102,26 +105,57 @@
 
 			if(d > 200) {
 				d = 200;
-				drawLine(600, 100,  800, 300);
-				drawLine(600, 100, 400, 300);
+				drawLine(400, 100,  600, 300);
+				drawLine(600, 300, 800, 500);
 			}
 
-			drawCircle(600 + d, 100 + d, 80, 10, 'green');
-			drawCircle(400 + d, 300 - d, 80, 8, 'red');
-			drawCircle(200 + d, 500 - d, 80, 5, 'blue');
+			drawCircle(400, 100, 80, 5, 'green');
+			drawCircle(600 + d, 300 + d, 80, 10, 'red');
+			drawCircle(400 + d, 500 - d, 80, 8, 'blue');
 
 			if (d == 200) {
 				return;
 			}
 
 			requestAnimFrame(function() {
-				rotateNodes(canvas, context, startTime);
+				rotateNodesOne(canvas, context, startTime);
 			});
 		}
 
-		function startAnimation() {
+		function rotateNodesTwo(canvas, context, startTime) {
+			// update
+			var time = (new Date()).getTime() - startTime;
+
+			var linearSpeed = 75;
+			var d = linearSpeed * time / 1000;
+
+			context.clearRect(0, 0, canvas.width, canvas.height);
+
+			if(d > 200) {
+				d = 200;
+				drawLine(400, 100,  200, 300);
+				drawLine(400, 100, 600, 300);
+			}
+
+			drawCircle(400 - d, 100 + d, 80, 5, 'green');
+			drawCircle(600 - d, 300 - d, 80, 8, 'blue');
+			drawCircle(800 - d, 500 - d, 80, 10, 'red');
+
+			if (d == 200) {
+				return;
+			}
+
+			requestAnimFrame(function() {
+				rotateNodesTwo(canvas, context, startTime);
+			});
+		}
+
+		function startAnimation(index) {
 	        var startTime = (new Date()).getTime();
-	        rotateNodes(canvas, context, startTime);
+	        if(index == 1)
+	        	rotateNodesOne(canvas, context, startTime);
+	        else
+	        	rotateNodesTwo(canvas, context, startTime);
 	    }
     </script>
   </body>
