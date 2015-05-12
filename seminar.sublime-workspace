@@ -387,6 +387,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 3584,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ilustracije.html",
+			"settings":
+			{
+				"buffer_size": 3153,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -603,6 +619,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"200",
+			"600",
+			"'red'",
 			"refresh",
 			"draw",
 			"drawCircles",
@@ -727,10 +746,7 @@
 			"disabled",
 			"+",
 			"addToGroup",
-			"+",
-			"busevi",
-			"Busevi",
-			"busevi"
+			"+"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -756,8 +772,67 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3584,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3419,
+								3552
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2112.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "ilustracije.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3153,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2414,
+								2414
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1408.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

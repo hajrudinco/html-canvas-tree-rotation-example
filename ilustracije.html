@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      .button {
+        margin: 10px; padding: 20px; line-height: 60px; background-color: green; color: white; font-size: 20px; font-family: Verdana; border-radius: 5px; width: 100px; height: 60px; text-align: center; float: left;
+      }
+      .navigation {
+        margin: 10px; padding: 20px; line-height: 60px; background-color: silver; color: white; font-size: 20px; font-family: Verdana; border-radius: 5px; width: 20px; height: 60px; text-align: center; float: left; text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="1000" height="800" style="clear: both; float: left;"></canvas>
+    <script>
+        // 1. Pričekati da se učita stranica
+        window.onload = function() {
+            startMove();
+        }
+
+
+        function drawCircle(context, centerX, centerY, radius, value, color) {
+            context.beginPath();
+            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            context.fillStyle = color;
+            context.fill();
+            context.lineWidth = 5;
+            context.strokeStyle = '#003300';
+            context.stroke();
+
+            context.textAlign = 'center';
+            context.fillStyle = "#FFFFFF";
+            context.font = "80px Verdana";
+            context.fillText(value, centerX, centerY + 30);
+        }
+
+        function drawShape(){ 
+            // 2. Dohvatiti pokazivač (referencu) na canvas element
+            var canvas  = document.getElementById("myCanvas");
+
+            // 3. Uzeti 2D kontekst (context) iz canvas elementa
+            var context = canvas.getContext("2d");
+
+            // 4. Crtati oblike koristeći funkcije 2D konteksta
+            drawCircle(context, 600, 100, 80, 10, 'green');
+        }
+
+        function moveNode(canvas, context, startTime) {
+
+            var time = (new Date()).getTime() - startTime;
+
+            var linearSpeed = 75;
+            var d = linearSpeed * time / 1000;
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            if(d > 200) {
+                d = 200;
+            }
+
+            drawCircle(context, 600 + d, 100 + d, 80, 10, 'green');
+
+            if (d == 200) {
+                return;
+            }
+
+            requestAnimFrame(function() {
+                moveNode(canvas, context, startTime);
+            });
+        }
+
+        window.requestAnimFrame = (function(callback) {
+            return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
+                    window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+                        function(callback) {
+                            window.setTimeout(callback, 1000 / 60);
+                        };
+        })();
+
+        function startMove() {
+            var startTime = (new Date()).getTime();
+            var canvas  = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+            moveNode(canvas, context, startTime);
+        }
+
+    </script>
+  </body>
+</html>
